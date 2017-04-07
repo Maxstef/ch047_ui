@@ -5,12 +5,13 @@ import {Payment} from '../model/payment';
 import {Tariff} from '../model/tariff';
 import {DateService} from '../services/date.service';
 import 'rxjs/Rx';
+import {config} from "../config";
 
 @Injectable()
 export class PaymentService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private paymentsUrl = "http://localhost:2847/payments";
-    private tariffUrl = "http://localhost:2847/tariff";
+    private paymentsUrl = config.url + "/payments";
+    private tariffUrl = config.url + "/tariff";
     constructor(private http: Http, private dateService: DateService) { }
 
 

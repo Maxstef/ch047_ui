@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { Observable } from "rxjs/Rx";
-
-
+import {config} from "../config";
 import {DateService} from '../services/date.service';
 import 'rxjs/Rx';
 
 @Injectable()
 export class AuthService {
-    url = 'http://localhost:2847/users';
+    url = config.url + '/users';
     loggedIn: boolean;
     role: string;
     activeUser: string;
