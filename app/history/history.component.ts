@@ -9,8 +9,7 @@ import * as lodash from 'lodash';
 
 @Component({
     selector: "ms-history",
-    templateUrl: "app/history/history.component.html",
-    styleUrls: ['app/history/history.component.css'],
+    templateUrl: "app/history/history.component.html"
 })
 
 export class HistoryComponent implements OnInit {

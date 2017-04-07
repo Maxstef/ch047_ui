@@ -5,8 +5,7 @@ import{Router} from '@angular/router';
 
 @Component({
     selector: "ms-login",
-    templateUrl: "app/login/login.component.html",
-    styleUrls: ['app/login/login.component.css']
+    templateUrl: "app/login/login.component.html"
 })
 
 export class LoginComponent implements  OnInit{

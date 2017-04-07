@@ -6,8 +6,7 @@ import {FormGroup, FormBuilder, Validators, FormArray, FormControl} from "@angul
 
 @Component({
     selector: "ms-change-tariff",
-    templateUrl: "app/change-tariff/change-tariff.component.html",
-    styleUrls: ['app/change-tariff/change-tariff.component.css']
+    templateUrl: "app/change-tariff/change-tariff.component.html"
 })
 
 export class ChangeTariffComponent implements OnInit {

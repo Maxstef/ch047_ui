@@ -13,7 +13,6 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 @Component({
     selector: "ms-set-counter-value",
     templateUrl: "app/set-counter-value/set-counter-value.component.html",
-    styleUrls: ['app/set-counter-value/set-counter-value.component.css'],
     providers: [FormBuilder]
 })
 

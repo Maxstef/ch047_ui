@@ -7,8 +7,7 @@ import {CalculateService} from '../services/calculate.service';
 
 @Component({
   selector: "ms-calculate",
-  templateUrl: "app/calculate/calculate.component.html",
-  styleUrls: ['app/calculate/calculate.component.css']
+  templateUrl: "app/calculate/calculate.component.html"
 })
 
 export class CalculateComponent {

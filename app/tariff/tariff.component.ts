@@ -4,8 +4,7 @@ import {PaymentService} from "../services/payment.service";
 
 @Component({
     selector: "ms-tariff",
-    templateUrl: "app/tariff/tariff.component.html",
-    styleUrls: ['app/tariff/tariff.component.css']
+    templateUrl: "app/tariff/tariff.component.html"
 })
 
 export class TariffComponent implements  OnInit{
