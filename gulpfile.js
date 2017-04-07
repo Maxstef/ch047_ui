@@ -11,6 +11,8 @@ var gulp = require('gulp'), //"gulp": "^3.9.1",
     cssPrefixer = require('gulp-autoprefixer'), //"gulp-autoprefixer": "^3.1.1",
     browserSync = require('browser-sync').create(),
     rename = require('gulp-rename'),
+    sass = require('gulp-sass'),
+    filter = require('gulp-filter'),
     cssMinify = require('gulp-cssnano'); //"gulp-cssnano": "^2.1.2",
 
 gulp.task('clean', function () {
@@ -68,7 +70,11 @@ gulp.task('assets', function () {
 });
 
 gulp.task('styles', function () {
-    gulp.src(['app/**/*.css', 'node_modules/bootstrap/dist/css/bootstrap.css'])
+    var styles = filter('styles.+(scss|css)', {restore: true});
+    gulp.src(['styles.+(scss|css)', 'node_modules/bootstrap/dist/css/bootstrap.css'])
+        .pipe(styles)
+        .pipe(sass())
+        .pipe(styles.restore)
         .pipe(concat('styles.css'))
         .pipe(cssPrefixer())
         .pipe(cssMinify())
