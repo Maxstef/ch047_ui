@@ -1,16 +1,20 @@
 {
-  "name": "ng-serve",
+  "name": "ch047",
   "version": "0.0.1",
   "description": "ExpressJs serving Angular2 app",
   "main": "serve.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Max",
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.1",
     "path": "^0.12.7",
     "json-server": "^0.9.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Maxstef/ch047_ui"
   }
 }

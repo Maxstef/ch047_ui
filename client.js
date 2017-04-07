@@ -1,27 +1,23 @@
 'use strict';
-//              CLIENT
+
 var express = require('express'),
     app = express(),
-    path = require('path'),
-    projectRoot = __dirname + '/dist/';
-app.use(express.static(projectRoot));
+    path = require('path');
 
-app.get('*', function (req, res) {
-    res.sendFile(path.join(projectRoot + '/index.html'));
+
+app.set('port', (process.env.PORT || 3009));
+
+app.use(express.static(__dirname + '/dist'));
+
+// views is directory for all template files
+app.set('views', __dirname + '/app');
+app.set('view engine', 'html');
+
+app.get('/', function(request, response) {
+  response.render('pages/index');
 });
 
-var port = 3009;
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
 
-console.log('Client up and running on http://localhost:/' + port);
-app.listen(port);
-
-//              JSON-SERVER
-var jsonServer = require('json-server'),
-    server = jsonServer.create(),
-    router = jsonServer.router('db.json'),
-    serverPort = 2847;
-server.use(jsonServer.defaults());
-
-server.use(router);
-console.log('Server up and running on http://localhost:/' + serverPort);
-server.listen(serverPort);
