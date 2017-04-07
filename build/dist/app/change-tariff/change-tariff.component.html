@@ -1,0 +1,62 @@
+<div class="container">
+    <ms-tariff></ms-tariff>
+    <div class="clearfix"></div>
+    <form  [formGroup]="newTariffForm">
+        <h2>Змінити тариф</h2>
+        <div formArrayName="tariffs">
+            <div *ngFor="let item of newTariffForm.controls.tariffs.controls; let last = last; let first = first; let i = index;">
+                <div [formGroupName]="i" class="form-group form-group-2 col-sm-12">
+                    <div [class]="(newTariffForm['controls']['tariffs']['controls'][i]['controls']['from'].errors)?'has-error form-model col-sm-4':'form-model col-sm-4'">
+                        <label>Від (кВ)</label>
+                        <input type="text" class="form-control" formControlName="from" readonly>
+                    </div>
+                    <div [class]="(newTariffForm['controls']['tariffs']['controls'][i]['controls']['to'].errors)?'has-error form-model col-sm-4':'form-model col-sm-4'">
+                        <label>До (кВ)</label>
+                        <input type="text" class="form-control" formControlName="to" [readonly]="lastRange || !last">
+                        <label *ngIf="last"><input type="checkbox" (change)="validChange()">Залишити поле пустим</label>
+                    </div>
+                    <div [class]="(newTariffForm['controls']['tariffs']['controls'][i]['controls']['value'].errors)?'has-error form-model col-sm-3':'form-model col-sm-3'">
+                        <label>Ціна (Грн)</label>
+                        <input type="text" class="form-control" formControlName="value" [readonly]="!last">
+                    </div>
+                    <div class="form-model col-sm-1">
+                        <span *ngIf="last && !first" class="glyphicon glyphicon-remove-sign glyphicon-2" (click)="deleteTariffRange()"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="newTariffForm.controls.tariffs.length < 5 && !lastRange && newTariffForm.status != 'INVALID'">
+            <span (click)="addTariffRange()" class="glyphicon glyphicon-plus-sign glyphicon-2 center"></span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" (click)="staticModal.show()" [disabled]="newTariffForm.status == 'INVALID' || !lastRange">Зберегти</button>
+    </form>
+</div>
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+		  <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+		<h4 class="modal-title pull-left">Підтвердіть тариф:</h4>
+      </div>
+      <div class="modal-body">
+            <table class="table table-striped">
+                <tr>
+                    <td>Від (кВ)</td>
+                    <td>До (кВ)</td>
+                    <td>Ціна (грн)</td>
+                </tr>
+                <tr *ngFor="let tariff of newTariffForm['controls']['tariffs']['controls']">
+                    <td>{{tariff.controls.from.value}}</td>
+                    <td>{{tariff.controls.to.value}}</td>
+                    <td>{{tariff.controls.value.value}}</td>
+                </tr>
+            </table>
+            <button class="btn btn-primary modal-btn" (click)="addTariff(newTariffForm.controls.tariffs.controls);staticModal.hide()">Підтвердити</button>
+		    <button class="btn btn-primary modal-btn" (click)="staticModal.hide()">Відміна</button>
+      </div>
+    </div>
+  </div>
+</div>

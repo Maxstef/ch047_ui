@@ -1,0 +1,23 @@
+#date-sort-asc{
+        left: 100px;
+    top: -7px;
+}
+#date-sort-desc{
+        left: 100px;
+    top: 7px;
+}
+.modal-btn-3{
+    float: right;
+    margin: 10px;
+}
+.modal-body-3{
+    overflow:  hidden;
+}
+.sort-3{
+    position: relative;
+}
+#change-sort-order{
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-top: 25px;
+}

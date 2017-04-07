@@ -1,0 +1,79 @@
+<div class="container" id="add-counter-data">
+			<div class="col-md-6">
+				<form id="add-counter-value-form" [formGroup]="valueAddForm"  (ngSubmit)="onSubmit()"  class="col-md-9"> 
+					<h2>Введіть дані лічильника</h2>
+					<div class="form-group">
+						<label for="value">Внести показник лічильника на сьогоднішній день</label>
+						<input id="value" type="text" class="form-control" (keyup)="inputBegin = true; feedback = null" formControlName="counterValue" autocomplete="off" required>
+					</div>
+					<div *ngIf="valueAddForm.controls.counterValue.errors && inputBegin " class="alert alert-danger">
+						<p>{{displayValueErrors(valueAddForm.controls.counterValue.errors)}}</p>
+					</div>
+					<div class="form-group">
+						<label for="date">Дата внесення</label>
+						<input id="date" type="text" class="form-control" formControlName="date" readonly>
+					</div>
+					<div *ngIf="valueAddForm.controls.date.errors" class="alert alert-danger">
+						Некоректна дата (Повинна бути сьогоднішня дата у форматі дд/мм/рррр)
+					</div>
+					<button type="submit" class="btn btn-primary" [disabled]="valueAddForm.status == 'INVALID'" (click)="staticModal.show()">Додати</button>
+					<div *ngIf="feedback" class="alert alert-success">
+						<p>{{feedback}}</p>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-4">
+				<h2>Останні внесені дані</h2>
+				<table class="table table-striped">
+					<tr>
+						<td>Показник</td>
+						<td>{{lastPayment.counterValue}}</td>
+					</tr>
+					<tr>
+						<td>Дата введення</td>
+						<td>{{dateService.displayDate(lastPayment.dateOfInput)}}</td>
+					</tr>
+					<tr>
+						<td>Зараховано за період</td>
+						<td>{{dateService.getPeriod(lastPayment.month, lastPayment.year) | capitalize}}</td>
+					</tr>
+					
+				</table>
+			</div>
+				
+				
+			</div>
+			<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="myMedModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+		  <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+		<h4 class="modal-title pull-left">Ви підтверджуєте наступні дані:</h4>
+      </div>
+      <div class="modal-body modal-body-5">
+		  <table class="table table-striped">
+						<tr>
+							<td>Показник лічильника</td>
+							<td>{{ valueAddForm.controls.counterValue.value }}</td>
+						</tr>
+						<tr>
+							<td>Дата внесення</td>
+							<td>{{ valueAddForm.controls.date.value }}</td>
+						</tr>
+						<tr>
+							<td>Дані будуть зараховані за</td>
+							<td>{{periodToRenew | capitalize}}</td>
+						</tr>
+						<tr>
+							<td colspan="2">Період {{periodToRenew | capitalize}} буде позначено як неоплачено</td>
+						</tr>
+					</table>
+		  <button class="btn btn-primary modal-btn modal-btn-5" (click)="staticModal.hide()">Ні</button>
+		  <button class="btn btn-primary modal-btn modal-btn-5" (click)="addPayment(valueAddForm.controls.counterValue.value);staticModal.hide()">Так</button>
+      </div>
+    </div>
+  </div>
+</div>

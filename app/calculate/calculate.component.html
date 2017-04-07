@@ -1,0 +1,42 @@
+<div class="container" id="calculator">
+  <ms-tariff (setTariff)="setTariff($event)"></ms-tariff>
+  <div class="clearfix">
+  </div>
+  <h2>Порахувати суму до сплати за поточним тарифом</h2>
+  <form id="calculator-form">
+    <div class="row row-1">
+      <div class="col-sm-4">
+        <label for="now-value">Теперішні покази лічильника</label>
+        <input class="form-control input-1" id="now-value" type="number" [value]="curValue"
+               (input)="setCurValue($event.target.value, false)">
+        <span class="glyphicon glyphicon-import big-1" (click)="setCurValue('', true)"><span class="tooltiptext-1">Використати останні внесені дані</span></span>
+      </div>
+      <div class="col-sm-4">
+        <label for="past-value">Попередні покази лічильника</label>
+        <input class="form-control input-1" id="past-value" type="number" [value]="prevValue"
+               (input)="setPrevValue($event.target.value, false)">
+        <span class="glyphicon glyphicon-import big-1" (click)="setPrevValue('', true)"><span class="tooltiptext-1">Використати дані за попередній місяць</span></span>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </form>
+  <div id="calculator-output" *ngIf="showCalculatorOutput()">
+    <div class="col-sm-6">
+      <p class="alert alert-danger" *ngIf="calculatorResult.error">{{calculatorResult.errorMessage}}</p>
+      <table class="table table-striped" *ngIf="!calculatorResult.error">
+        <tr>
+          <td>Різниця {{curTariff.changePointUnit}}</td>
+          <td>{{calculatorResult.totCount}}</td>
+        </tr>
+        <tr *ngFor="let item of calculatorResult.arrSum">
+          <td>{{item.kW}}{{curTariff.changePointUnit}} * {{item.priceForkW}}{{curTariff.valueUnit}}</td>
+          <td>{{calculateService.roundTwoDecimal(item.total)}}{{curTariff.valueUnit}}</td>
+        </tr>
+        <tr>
+          <td>Загальна сума</td>
+          <td>{{calculateService.roundTwoDecimal(calculatorResult.totSum)}}{{curTariff.valueUnit}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
