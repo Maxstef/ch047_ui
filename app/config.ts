@@ -1,3 +1,4 @@
 export let config = {
-  url: "http://localhost:2847"
+  url: "https://ofd-server.herokuapp.com"
 }
+// https://ofd-server.herokuapp.com/
