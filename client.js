@@ -13,10 +13,16 @@ app.use(express.static(__dirname + '/dist'));
 app.set('views', __dirname + '/app');
 app.set('view engine', 'html');
 
-app.get('/*', function(request, response) {
+app.get('/', function(request, response) {
   response.render('pages/index');
 });
+
+app.use(sendSpaFileIfUnmatched);
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+
+function sendSpaFileIfUnmatched(req,res) {
+  res.sendFile("index.html", { root: '.' });
+}
