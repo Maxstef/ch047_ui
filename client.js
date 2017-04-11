@@ -13,7 +13,7 @@ app.use(express.static(__dirname + '/dist'));
 app.set('views', __dirname + '/app');
 app.set('view engine', 'html');
 
-app.get('*', function(request, response) {
+app.get('/*', function(request, response) {
   response.render('pages/index');
 });
 
