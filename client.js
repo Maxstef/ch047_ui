@@ -17,17 +17,7 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
-app.get('/set-value', function(request, response) {
-  response.render('pages/index');
-});
-
-app.get('/tariff-calculate', function(request, response) {
-  response.render('pages/index');
-});
-
-app.get('/history', function(request, response) {
-  response.render('pages/index');
-});
+app.static('*', {redirect: '/'});
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
